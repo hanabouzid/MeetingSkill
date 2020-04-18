@@ -18,8 +18,8 @@ import pytz
 UTC_TZ = u'+00:00'
 SCOPES = ['https://www.googleapis.com/auth/calendar']
 FLOW = OAuth2WebServerFlow(
-    client_id='73558912455-mcb8cb7llg1bh84hls74257utt44rmlp.apps.googleusercontent.com',
-    client_secret='8YYYAuCbspk1FzQZB75KSzvF',
+    client_id='73558912455-smu6u0uha6c2t56n2sigrp76imm2p35j.apps.googleusercontent.com',
+    client_secret='0X_IKOiJbLIU_E5gN3NefNns',
     scope='https://www.googleapis.com/auth/contacts.readonly',
     user_agent='Smart assistant box')
 
@@ -48,7 +48,7 @@ class CreateEvent(MycroftSkill):
                 creds.refresh(Request())
             else:
                 flow = InstalledAppFlow.from_client_secrets_file(
-                    'credentials.json', SCOPES)       #dans mycroft on met '/opt/mycroft/skills/createeventskill.hanabouzid/credentials.json'
+                    'client_secret.json', SCOPES)       #dans mycroft on met '/opt/mycroft/skills/createeventskill.hanabouzid/credentials.json'
                 creds = flow.run_local_server(port=0)
                 # Save the credentials for the next run
             with open('token.pickle', 'wb') as token:
