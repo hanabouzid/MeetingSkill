@@ -15,6 +15,7 @@ from oauth2client.client import OAuth2WebServerFlow
 from oauth2client import tools
 import string
 import pytz
+#in the raspberry we add __main__.py for the authorization
 UTC_TZ = u'+00:00'
 SCOPES = ['https://www.googleapis.com/auth/calendar']
 FLOW = OAuth2WebServerFlow(
@@ -130,8 +131,9 @@ class CreateEvent(MycroftSkill):
                         self.speak_dialog("exist")
                         exist = True
                         mail = adsmails[l]
-                        attendee.append(mail)
+                        #attendee.append(mail)
                         # on va verifier la disponibilité de chaque invité
+                        #methode avec freebusy
                         body = {
                             "timeMin": datestart,
                             "timeMax": datend,
@@ -147,6 +149,7 @@ class CreateEvent(MycroftSkill):
                             for i in statut:
                                 if (i == 'busy' and statut[i] == []):
                                     self.speak_dialog("free")
+                                    attendee.append(mail)
                                     #ajouter l'email de x ala liste des attendee
                                 elif (i == 'busy' and statut[i] != []):
                                     self.speak_dialog("busy")
@@ -197,7 +200,8 @@ class CreateEvent(MycroftSkill):
                 if (freerooms[i] == room):
                     #ajouter l'email de room dans la liste des attendees
                     attendeess.append({'email': freemails[i]})
-
+        else:
+            room =''
         #creation d'un evenement
         event = {
             'summary': tittle,
