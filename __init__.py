@@ -243,13 +243,13 @@ class CreateEvent(MycroftSkill):
         if nb == 0:
             self.speak_dialog("cancellEvent")
         elif nb == n:
-            event = service.events().insert(calendarId='primary', sendNotifications=True, body=event).execute()
+            event = service.events().insert(calendarId='primary', sendNotifications=notif, body=event).execute()
             print('Event created: %s' % (event.get('htmlLink')))
             self.speak_dialog("eventCreated")
         else:
             res = self.get_response('Some of the attendees are busy would you like to continue creating the event yes or no?')
             if res == 'yes':
-                event = service.events().insert(calendarId='primary', sendNotifications=True, body=event).execute()
+                event = service.events().insert(calendarId='primary', sendNotifications=notif, body=event).execute()
                 print('Event created: %s' % (event.get('htmlLink')))
                 self.speak_dialog("eventCreated")
             elif res == 'no':
