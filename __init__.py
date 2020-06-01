@@ -52,7 +52,7 @@ class CreateEvent(MycroftSkill):
                 creds.refresh(Request())
             else:
                 flow = InstalledAppFlow.from_client_secrets_file(
-                    'client_secret.json', SCOPES)       #dans mycroft on met '/opt/mycroft/skills/createeventskill.hanabouzid/credentials.json'
+                    '/opt/mycroft/skills/meetingskill.hanabouzid/client_secret.json', SCOPES)       #dans mycroft on met '/opt/mycroft/skills/createeventskill.hanabouzid/credentials.json'
                 creds = flow.run_local_server(port=0)
                 # Save the credentials for the next run
             with open('token.pickle', 'wb') as token:
