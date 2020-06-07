@@ -39,7 +39,7 @@ class CreateEvent(MycroftSkill):
 
     @intent_handler(IntentBuilder("").require("create_event"))
     def createEventt(self):
-        storage1 = Storage('info3.dat')
+        storage1 = Storage('/opt/mycroft/skills/meetingskill.hanabouzid/info3.dat')
         credentials = storage1.get()
         if credentials is None or credentials.invalid == True:
             credentials = tools.run_flow(FLOW, storage1)
@@ -155,7 +155,7 @@ class CreateEvent(MycroftSkill):
                 x = self.get_response("who do you want to invite")
                 for l in range(0,len(nameListe)):
                     if x == nameListe[l]:
-                        self.speak_dialog("exist")
+                        self.speak_dialog("exist",data={"x":x})
                         exist = True
                         mail = adsmails[l]
                         #attendee.append(mail)
@@ -182,7 +182,7 @@ class CreateEvent(MycroftSkill):
                                     self.speak_dialog("busy",data={"att":x})
                                     nb -= 1
                 if exist == False:
-                    self.speak_dialog("notexist")
+                    self.speak_dialog("notexist",data={"x":x})
                 j += 1
 
         attendeess = []
